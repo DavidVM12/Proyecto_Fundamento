@@ -1,6 +1,6 @@
 # fundamento
 
-A new Flutter project.
+cucha sapa :D.
 
 ## Getting Started
 
