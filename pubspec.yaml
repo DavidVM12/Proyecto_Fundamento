@@ -29,18 +29,16 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  avatar_glow: ^2.0.2
   cupertino_icons: ^1.0.2
   flutter:
     sdk: flutter
-  flutter_blue: ^0.8.0
+  flutter_bluetooth_serial: ^0.4.0
+  highlight_text: ^1.5.0
+  speech_to_text: ^6.1.0
+  syncfusion_flutter_sliders: ^20.3.52
 
 dev_dependencies:
-
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
   flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
