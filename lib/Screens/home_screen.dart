@@ -1,23 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:fundamento/widgets/custom_appBar.dart';
+import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
+import 'package:fundamento/chat_page.dart';
+
+import '../SelectBonedDevicePage.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          children: const [
-            //appbar personalizado de la carpeta de widgets
-            SizedBox(
-              height: 150,
-              child: CustomAppBar(),
-            ),
-          ],
-        ),
+    return SafeArea(
+        child: Scaffold(
+      appBar: AppBar(
+        title: const Text('Connection'),
       ),
-    );
+      body: SelectBondedDevicePage(
+        onCahtPage: (device1) {
+          BluetoothDevice device = device1;
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return ChatPage(server: device);
+              },
+            ),
+          );
+        },
+      ),
+    ));
   }
 }

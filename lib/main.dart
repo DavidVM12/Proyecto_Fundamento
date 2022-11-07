@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
-import 'package:fundamento/SelectBonedDevicePage.dart';
-import 'package:fundamento/chat_page.dart';
+import 'package:fundamento/Screens/screens.dart';
 
 void main() {
   runApp(MyApp());
@@ -33,36 +32,11 @@ class MyApp extends StatelessWidget {
               ),
             );
           } else {
-            return Home();
+            return LoginScreen();
           }
         },
         // child: MyHomePage(title: 'Flutter Demo Home Page'),
       ),
     );
-  }
-}
-
-class Home extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-      appBar: AppBar(
-        title: const Text('Connection'),
-      ),
-      body: SelectBondedDevicePage(
-        onCahtPage: (device1) {
-          BluetoothDevice device = device1;
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) {
-                return ChatPage(server: device);
-              },
-            ),
-          );
-        },
-      ),
-    ));
   }
 }
