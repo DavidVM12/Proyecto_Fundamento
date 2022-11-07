@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
-import 'package:fundamento/chat_page.dart';
-
-import '../SelectBonedDevicePage.dart';
+import 'package:fundamento/connection.dart';
+import 'package:fundamento/led.dart';
 
 class HomeScreen extends StatelessWidget {
   @override

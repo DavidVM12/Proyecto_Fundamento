@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
-import 'package:fundamento/BluetoothDeviceListEntry.dart';
+import 'package:fundamento/device.dart';
 
 class SelectBondedDevicePage extends StatefulWidget {
   /// If true, on page start there is performed discovery upon the bonded devices.
@@ -49,6 +49,7 @@ class _SelectBondedDevicePage extends State<SelectBondedDevicePage> {
     if (_isDiscovering!) {
       _startDiscovery();
     }
+
     // Setup a list of the bonded devices
     FlutterBluetoothSerial.instance
         .getBondedDevices()
@@ -61,7 +62,7 @@ class _SelectBondedDevicePage extends State<SelectBondedDevicePage> {
                   widget.checkAvailability
                       ? _DeviceAvailability.maybe
                       : _DeviceAvailability.yes,
-                  1),
+                  device.hashCode),
             )
             .toList();
       });
@@ -82,10 +83,10 @@ class _SelectBondedDevicePage extends State<SelectBondedDevicePage> {
       setState(() {
         Iterator i = devices.iterator;
         while (i.moveNext()) {
-          var device = i.current;
-          if (device.device == r.device) {
-            device.availability = _DeviceAvailability.yes;
-            device.rssi = r.rssi;
+          var _device = i.current;
+          if (_device.device == r.device) {
+            _device.availability = _DeviceAvailability.yes;
+            _device.rssi = r.rssi;
           }
         }
       });
@@ -101,7 +102,7 @@ class _SelectBondedDevicePage extends State<SelectBondedDevicePage> {
   @override
   void dispose() {
     // Avoid memory leak (`setState` after dispose) and cancel discovery
-    _discoveryStreamSubscription!.cancel();
+    _discoveryStreamSubscription?.cancel();
 
     super.dispose();
   }
@@ -110,12 +111,12 @@ class _SelectBondedDevicePage extends State<SelectBondedDevicePage> {
   Widget build(BuildContext context) {
     List<BluetoothDeviceListEntry> list = devices
         .map(
-          (device) => BluetoothDeviceListEntry(
-            device: device.device,
-            // rssi: _device.rssi,
-            // enabled: _device.availability == _DeviceAvailability.yes,
+          (_device) => BluetoothDeviceListEntry(
+            device: _device.device,
+            rssi: _device.rssi,
+            enabled: _device.availability == _DeviceAvailability.yes,
             onTap: () {
-              widget.onCahtPage(device.device);
+              widget.onCahtPage(_device.device);
             },
           ),
         )
